@@ -52,6 +52,6 @@ def data_p3(local_max_adult, local_min_adult, local_max_child, local_min_child,
 
 
 # test function
-house_id, no_adult, no_child, no_days, allergies, no_patient = data_p3(max_adult, min_adult, max_child, min_child,
-                                                                       min_patient, max_days, min_days, allergies_list)
-print(house_id, no_adult, no_child, no_days, allergies, no_patient)
+# house_id, no_adult, no_child, no_days, allergies, no_patient = data_p3(max_adult, min_adult, max_child, min_child,
+#                                                                        min_patient, max_days, min_days, allergies_list)
+# print(house_id, no_adult, no_child, no_days, allergies, no_patient)

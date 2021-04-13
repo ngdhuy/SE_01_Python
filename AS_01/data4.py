@@ -32,5 +32,5 @@ def data_p4(local_jobs_list, local_data_no):
 
 
 # test function
-data_dict = data_p4(jobs_list, data_no)
-print(data_dict)
+# data_dict = data_p4(jobs_list, data_no)
+# print(data_dict)
