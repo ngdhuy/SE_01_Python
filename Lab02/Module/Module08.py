@@ -118,8 +118,76 @@ def count_word(string, word):
 
 
 # 12. Split word (not duplicate)
+def is_exist_word(arr_word, word):
+    for item in arr_word:
+        if item == word:
+            return False
+    else:
+        return True
+
+
+def split_word_not_duplicate(string):
+    arr_word = []
+    word = ""
+    for i in range(0, len(string)):
+        if string[i] == " ":
+            if is_exist_word(arr_word, word):
+                arr_word.append(word)
+                word = ""
+        elif string[i] != "." or string[i] != "," or string[i] != ";" or string[i] != "?" or string[i] != "!":
+            word += string[i]
+    else:
+        if is_exist_word(arr_word, word):
+            arr_word.append(word)
+            return arr_word
+
+
 # 13. Statistic frequency for each word
+def count_word(arr_word, word):
+    count = 0
+    for item in arr_word:
+        if item == word:
+            count += 1
+    return count
+
+
+def statistic_frequency_word(string):
+    arr_word = split_word_not_duplicate(string)
+    arr = split_word_fix(string)
+    dic = {}
+    for word in arr_word:
+        dic[word] = count_word(arr, word)
+    else:
+        return dic
+
+
 # 14. Filter the number in content
+def is_int(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
+
+
+def is_float(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
+
+def split_number_in_content(string):
+    arr_word = split_word_fix(string)
+    arr = []
+    for item in arr_word:
+        if is_int(item) or is_float(item):
+            arr.append(item)
+    else:
+        return arr
+
+
 # 15. Split word
 def split_word(string):
     arr_word = []
@@ -139,12 +207,14 @@ def split_word(string):
 def split_word_fix(string):
     arr_word = []
     word = ""
-    for i in range(0, len(string)):
-        if string[i] == " ":
+    for i in string:
+        if i == " ":
             arr_word.append(word)
             word = ""
-        elif string[i] != "." or string[i] != "," or string[i] != ";" or string[i] != "?" or string[i] != "!":
-            word += string[i]
+        elif i != '.' or i != ',' or i != ';' or i != '?' or i != '!' \
+                or i != '(' or i != ')' or i != '{' or i != '}' or i != '[' \
+                or i != ']' or i != '-':
+            word += i
     else:
         arr_word.append(word)
         return arr_word
