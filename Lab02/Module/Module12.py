@@ -5,29 +5,38 @@ def load_file(file_name):
     journal = []
     try:
         with open(file_name, "r") as file:
-            for line in file:
-                lst = line.split('|')
-                lst[2] = lst[2].split('\n')[0]
-                item = {"datetime": lst[0], "username": lst[1], "content": lst[2]}
-                journal.append(item)
-    except:
+            try:
+                for line in file:
+                    print(line)
+                    lst = line.split('|')
+                    lst[2] = lst[2].split('\n')[0]
+                    item = {"datetime": lst[0], "username": lst[1], "content": lst[2]}
+                    journal.append(item)
+            except IOError as e:
+                print(e)
+            finally:
+                file.close()
+    except IOError as error:
+        print(error)
         print(f"Cannot access (Read) file: {file_name}")
-    finally:
-        file.close()
     return journal
 
 
 def save_file(file_name, journal):
     try:
         with open(file_name, "w") as file:
-            for item in journal:
-                string = item["datetime"] + "|" + item["username"] + "|" + item["content"] + "\n"
-                file.write(string)
-        print("Data is storage")
-    except:
+            try:
+                for item in journal:
+                    string = item["datetime"] + "|" + item["username"] + "|" + item["content"] + "\n"
+                    file.write(string)
+                print("Data is storage")
+            except IOError as e:
+                print(e)
+            finally:
+                file.close()
+    except IOError as error:
+        print(error)
         print(f"Cannot access (Write) file: {file_name}")
-    finally:
-        file.close()
 
 
 def input_item():
@@ -40,6 +49,8 @@ def print_journal(journal):
     print("-" * 160)
     print("| {:<30} | {:<20} | {:<100} |".format('Datetime', 'User name', 'Content'))
     print("|", "-" * 30, "|", "-" * 20, "|", "-" * 100, "|")
+    if len(journal) <= 0:
+        print("| {:<156} |".format("Journal is empty"))
     for item in journal:
         print("| {:<30} | {:<20} | {:<100} |".format(item['datetime'], item['username'], item['content']))
     print("-" * 160)
